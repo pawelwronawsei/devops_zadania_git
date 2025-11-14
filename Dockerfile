@@ -7,7 +7,13 @@ RUN npm install || echo "Brak package.json"
 
 COPY . .
 
-RUN if [ -f package.json ] && grep -q "\"build\"" package.json; then npm run build; else echo "Brak build script – kopiuję pliki do /app/build" && mkdir -p build && cp -r * build/; fi
+RUN if [ -f package.json ] && grep -q "\"build\"" package.json; then \
+      npm run build; \
+    else \
+      echo "Brak build script – kopiuję pliki do /app/build"; \
+      mkdir -p build; \
+      find . -maxdepth 1 ! -name build ! -name . -exec cp -r {} build/ \; ; \
+    fi
 
 FROM nginx:alpine
 
