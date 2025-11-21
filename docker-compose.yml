@@ -14,13 +14,25 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: node-backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql-db
+    networks:
+      - my-network
+
   frontend:
     build: .
     container_name: nginx-frontend
     ports:
       - "8080:80"
     depends_on:
-      - mysql-db
+      - backend
     networks:
       - my-network
 
