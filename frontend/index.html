@@ -19,7 +19,7 @@
     <h1>Witaj w moim prostym projekcie HTML!</h1>
     <p>Branch: feature/branch-1</p>
     <script>
-      fetch("http://51.20.122.47:3000/api/time")
+      fetch("/api/time")
         .then(res => res.json())
         .then(data => {
           document.body.innerHTML += `<p>Czas z MySQL: ${data.time}</p>`;
