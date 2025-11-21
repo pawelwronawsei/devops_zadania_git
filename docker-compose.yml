@@ -16,7 +16,7 @@ services:
 
   backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile.backend
     container_name: node-backend
     ports:
@@ -27,7 +27,9 @@ services:
       - my-network
 
   frontend:
-    build: .
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: nginx-frontend
     ports:
       - "8080:80"
